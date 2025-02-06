@@ -10,6 +10,6 @@ public class JUnitTest {
         int b = 2;
         int sum = 3;
 
-        Assertions.assertEquals(sum, a + b); // JUnit에서 제공하는 검증 메서드인 assertEquals() 로 값이 같은지 확인
+        Assertions.assertEquals(sum, a + b); // JUnit 에서 제공하는 검증 메서드인 assertEquals() 로 값이 같은지 확인
     }
 }
