@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,5 +43,25 @@ public class JUnitQuiz {
 
         // number3은 number2 보다 작은지 확인
         assertThat(number3).isLessThan(number2);
+    }
+
+    @Test
+    public void jUnitQuiz3() {
+        System.out.println("This is first test");
+    }
+
+    @Test
+    public void jUnitQuiz4() {
+        System.out.println("This is second test");
+    }
+
+    @BeforeEach
+    public void BeforeEach() {
+        System.out.println("Hello!");
+    }
+
+    @AfterAll
+    public static void AfterAll() {
+        System.out.println("Bye!");
     }
 }
