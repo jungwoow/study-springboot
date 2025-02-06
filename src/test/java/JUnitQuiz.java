@@ -20,4 +20,26 @@ public class JUnitQuiz {
         // name1과 name2가 다른지 확인
         assertThat(name1).isNotEqualTo(name3);
     }
+
+    @Test
+    public void jUnitQuiz2() {
+        int number1 = 15;
+        int number2 = 0;
+        int number3 = -5;
+
+        // number1은 양수인지 확인
+        assertThat(number1).isPositive();
+
+        // number2은 0인지 확인
+        assertThat(number2).isZero();
+
+        // number3은 음수인지 확인
+        assertThat(number3).isNegative();
+
+        // number1은 number2 보다 큰지 확인
+        assertThat(number1).isGreaterThan(number2);
+
+        // number3은 number2 보다 작은지 확인
+        assertThat(number3).isLessThan(number2);
+    }
 }
