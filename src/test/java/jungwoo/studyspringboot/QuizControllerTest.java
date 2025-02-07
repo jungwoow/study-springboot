@@ -7,12 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -63,5 +65,41 @@ public class QuizControllerTest {
         result
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string("Bad Request!"));
+    }
+
+    @DisplayName("quiz(): POST /quiz 에 요청 본문이 {\"value\":1} 이면 응답 코드는 403, 응답 본문은 Forbidden! 반환")
+    @Test
+    public void postQuiz1() throws Exception {
+        // given
+        final String url = "/quiz";
+        Code code = new Code(1); // 요청에 보낼 Code 객체 생성
+
+        //when
+        final ResultActions result = mockMvc.perform(post(url)
+                .content(objectMapper.writeValueAsString(code)) // Code 객체를 JSON 으로 변환 (객체 직렬화) 후 요청 본문으로 전송
+                .contentType(MediaType.APPLICATION_JSON)); // JSON 타입으로 요청을 보내기 위해 덧붙이는 메서드
+
+        // then
+        result
+                .andExpect(status().isForbidden())
+                .andExpect(content().string("Forbidden!"));
+    }
+
+    @DisplayName("quiz(): POST /quiz 에 요청 본문이 {\"value\":13} 이면 응답 코드는 200, 응답 본문은 OK! 반환")
+    @Test
+    public void postQuiz2() throws Exception {
+        // given
+        final String url = "/quiz";
+        Code code = new Code(13); // 요청에 보낼 Code 객체 생성
+
+        //when
+        final ResultActions result = mockMvc.perform(post(url)
+                .content(objectMapper.writeValueAsString(code)) // Code 객체를 JSON 으로 변환 (객체 직렬화) 후 요청 본문으로 전송
+                .contentType(MediaType.APPLICATION_JSON)); // JSON 타입으로 요청을 보내기 위해 덧붙이는 메서드
+
+        // then
+        result
+                .andExpect(status().isOk())
+                .andExpect(content().string("OK!"));
     }
 }
