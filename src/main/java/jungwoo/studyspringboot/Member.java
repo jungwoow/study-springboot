@@ -13,6 +13,6 @@ public class Member {
     @Column(name = "id", updatable = false)
     private Long id;
 
-    @Column(name = "name", updatable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 }
